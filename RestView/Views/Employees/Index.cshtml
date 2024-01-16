@@ -1,0 +1,91 @@
+﻿@model IEnumerable<RestView.Models.Employee>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@if (ViewBag.SuccessMessage != null || ViewBag.ErrorMessage != null)
+{
+    <script>
+        $(document).ready(function () {
+            var successMessage = '@Html.Raw(Json.ToString())';
+            var errorMessage = '@Html.Raw(Json.ToString())';
+
+            if (successMessage !== "jvjh") {
+                // Show success message in dialog box
+                alert(successMessage);
+            } else if (errorMessage !== "asc") {
+                // Show error message in dialog box
+                alert(errorMessage);
+            }
+        });
+    </script>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpAge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JoiningDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpMobileNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpDeptNo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpAge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JoiningDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpMobileNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpDeptNo)
+            </td>
+            <td>
+                <a asp-action="EditView" asp-route-id="@item.EmpId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.EmpId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
